@@ -1,32 +1,56 @@
 package com.example.meetingsummary
 
+import android.media.MediaRecorder
 import android.os.Bundle
+import android.widget.Button
+import android.widget.TextView
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.*
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Home
+import androidx.compose.material.icons.filled.Menu
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.navigation.NavController
-import androidx.navigation.compose.*
-import androidx.navigation.compose.composable
-import com.example.meetingsummary.ui.theme.MeetingsummaryTheme
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Home
-import androidx.compose.material.icons.filled.Menu
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import android.media.MediaRecorder
+import androidx.navigation.NavController
+import androidx.navigation.compose.*
+import com.example.meetingsummary.ui.theme.MeetingsummaryTheme
 import java.io.IOException
+
+//import androidx.appcompat.app.AppCompatActivity
 
 
 class MainActivity : ComponentActivity() {
     private val audioRecorder = AudioRecorder()  // 使用 remember 創建 Composable 可訪問的錄音對象
+    private lateinit var transcribeButton: Button
+    private lateinit var transcribeResult: TextView
+    val YOUR_KEY = ""
+    val URL = "https://api.openai.com/v1/completions"
+
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        transcribeButton = findViewById(R.id.transcribeButton)
+        transcribeResult = findViewById(R.id.transcribeResult)
+
+        transcribeButton.setOnClickListener {
+            // 在這裡添加語音轉錄代碼，並使用API Key
+            val transcribedText = transcribeAudio(apiKey)
+            transcribeResult.text = transcribedText
+        }
+
+        private fun transcribeAudio(apiKey: String): String {
+            // 在這裡添加語音轉錄代碼，並使用API Key
+            // 調用OpenAI API 執行語音轉錄
+            // 返回轉錄的文本
+            return "這是語音轉錄的文本"
+        }
+
         setContent {
             MeetingsummaryTheme {
                 val navController = rememberNavController()
